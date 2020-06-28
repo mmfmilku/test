@@ -1,17 +1,12 @@
 package mycl;
 
 import org.junit.Test;
-import sun.misc.Launcher;
+import util.Base64Util;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class MyClassLoader extends ClassLoader{
-
-//    public MyClassLoader(ClassLoader parent) {
-//        super(parent);
-//    }
 
     public MyClassLoader() {
         super();
@@ -35,11 +30,12 @@ public class MyClassLoader extends ClassLoader{
         String contentRoot = "\\src\\main\\resources\\myclass\\";
 //        String fileName = name.replaceAll("\\.", "\\\\");
         String fileName = name.substring(name.indexOf('.') + 1);
-        String filePath = rootPath + contentRoot + fileName + ".class";
+        String filePath = rootPath + contentRoot + fileName + ".enclass";
         return loadFile(filePath);
     }
 
     private static byte[] loadFile(String filePath) {
+        long start = System.currentTimeMillis();
         File f = new File(filePath);
         if (!f.exists()) {
             System.out.println("文件不存在:" + filePath);
@@ -50,11 +46,12 @@ public class MyClassLoader extends ClassLoader{
         byte[] data = null;
         try {
             in = new FileInputStream(f);
+//            in = new BufferedInputStream(new FileInputStream(f));
             out = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1];
+            byte[] buffer = new byte[1024];
             int size = 0;
             while ((size = in.read(buffer)) != -1) {
-                out.write(buffer);
+                out.write(buffer, 0, size);
             }
             data = out.toByteArray();
         } catch (Exception e) {
@@ -76,6 +73,8 @@ public class MyClassLoader extends ClassLoader{
             }
         }
         System.out.println("data:" + Arrays.toString(data));
+        System.out.println("str:" + Base64Util.encode2Str(data));
+        System.out.println("耗时:" + (System.currentTimeMillis() - start) + "mm");
         return data;
     }
 

@@ -1,5 +1,7 @@
 package mycl;
 
+import java.lang.reflect.Method;
+
 public class Demo {
 
     public static void main(String[] args) {
@@ -16,6 +18,11 @@ public class Demo {
             System.out.println(o2.getClass().getClassLoader());
 
             System.out.println(o1.getClass() + "," + o2.getClass());
+
+            Method m = k.getMethod("test");
+            m.invoke(o1);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

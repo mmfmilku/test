@@ -5,7 +5,7 @@ public class MyClass {
     public String msg = "";
 
     public void test() {
-        System.out.println("This is my Class");
+        System.out.println("This is my Class 2");
     }
 
 }
