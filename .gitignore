@@ -1,6 +1,10 @@
-ompiled class file
+# compiled class file
 *.class
 target/
+
+# IDEA file
+*.iml
+.idea/
 
 # Log file
 *.log
