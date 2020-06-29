@@ -1,6 +1,5 @@
 package mycl;
 
-import org.junit.Test;
 import util.Base64Util;
 
 import java.io.*;
@@ -76,14 +75,6 @@ public class MyClassLoader extends ClassLoader{
         System.out.println("str:" + Base64Util.encode2Str(data));
         System.out.println("耗时:" + (System.currentTimeMillis() - start) + "mm");
         return data;
-    }
-
-    @Test
-    public void test() {
-        String name = "mycl.MyClass";
-        byte[] data = getClassData(name);
-        System.out.println(new String(data));
-        System.out.println(Arrays.toString(data));
     }
 
 }
