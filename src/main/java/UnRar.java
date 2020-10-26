@@ -12,7 +12,8 @@ public class UnRar{
 
     public static void main(String[] args) {
         try {
-            unrar("F:\\dev\\project\\sxf-spa-20200701-my.rar");
+            unrar("F:\\tmp\\yuinyan#1039861.rar");
+//            unrar("F:\\tmp\\WinRAR 5.0.rar");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +39,11 @@ public class UnRar{
             }
         }
         Archive archive = new Archive(new FileInputStream(rarFile));
+        if(archive.isEncrypted()){
+            throw new Exception(rarFile.getName() + " 需要密码!");
+        }
         FileHeader fileHeader = archive.nextFileHeader();
+        System.out.println("fileHeader:" + fileHeader.getFileNameString());
         while (fileHeader != null) {
             if (fileHeader.isDirectory()) {
                 fileHeader = archive.nextFileHeader();
